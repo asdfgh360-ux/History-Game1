@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>历史桌游创作营｜课程介绍</title>
+  <style>
+    :root{
+      --paper:#f7f4ee;
+      --ink:#111111;
+      --muted:#4b4b4b;
+      --hair:#d9d2c7;
+      --accent:#8b4a18;     /* 轻微强调色：与你之前按钮一致 */
+      --accent2:#111111;    /* 黑色强调 */
+      --card:#ffffff;
+      --shadow: 0 18px 45px rgba(0,0,0,.12);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(900px 500px at 10% 10%, rgba(139,74,24,.08), transparent 55%),
+                  radial-gradient(900px 500px at 90% 20%, rgba(0,0,0,.06), transparent 55%),
+                  var(--paper);
+      color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC","Microsoft YaHei", Arial, sans-serif;
+    }
+    .wrap{
+      width:min(1120px, 92vw);
+      margin:0 auto;
+      padding:28px 0 44px;
+    }
+
+    /* 顶部杂志栏 */
+    .mast{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 6px 10px;
+      border-bottom:1px solid var(--hair);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .brand .dot{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--accent);
+      box-shadow: 0 0 0 6px rgba(139,74,24,.10);
+    }
+    .issue{
+      text-align:right;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.5;
+      letter-spacing:.06em;
+      white-space:nowrap;
+    }
+
+    /* 主封面 */
+    .cover{
+      margin-top:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.72));
+      border:1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .cover::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 0%, rgba(139,74,24,.10), transparent 60%),
+        radial-gradient(760px 300px at 90% 20%, rgba(0,0,0,.06), transparent 60%);
+      pointer-events:none;
+    }
+
+    .coverInner{
+      position:relative;
+      padding:34px 38px 26px;
+    }
+    @media (max-width:720px){
+      .coverInner{padding:26px 18px 18px}
+    }
+
+    .kickerRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .kicker{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pill{
+      border:1px solid rgba(0,0,0,.12);
+      background: rgba(255,255,255,.65);
+      padding:7px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      font-weight:900;
+      font-size:12.5px;
+      letter-spacing:.02em;
+    }
+    .stamp{
+      border:1px solid rgba(0,0,0,.12);
+      padding:7px 12px;
+      border-radius:999px;
+      background: rgba(17,17,17,.92);
+      color:#fff;
+      font-weight:1000;
+      font-size:12.2px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    h1{
+      margin:6px 0 0;
+      font-size:58px;
+      line-height:1.02;
+      letter-spacing:-.02em;
+      font-weight:1100;
+      word-break:break-word;
+    }
+    @media (max-width:720px){
+      h1{font-size:40px}
+    }
+
+    .sub{
+      margin-top:12px;
+      max-width: 56em;
+      color:var(--muted);
+      font-size:16px;
+      line-height:2.0;
+    }
+    .sub b{color:var(--ink)}
+    .rule{
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px solid var(--hair);
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width:920px){
+      .rule{grid-template-columns:1fr}
+    }
+
+    .quote{
+      border-left:4px solid var(--accent);
+      padding:10px 14px;
+      background: rgba(255,255,255,.55);
+      border-radius: 14px;
+      line-height:1.9;
+      color:var(--ink);
+      font-weight:900;
+    }
+    .quote small{
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    .meta{
+      border:1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.62);
+      border-radius: 16px;
+      padding:12px 12px;
+    }
+    .meta h3{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-weight:1000;
+    }
+    .metaGrid{
+      margin-top:10px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px 10px;
+      color:var(--ink);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .metaGrid div{
+      padding:10px 10px;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:14px;
+      background: rgba(255,255,255,.75);
+    }
+    .metaGrid b{display:block; font-weight:1000}
+    .metaGrid span{color:var(--muted); font-weight:800}
+
+    /* 正文分区 */
+    .sections{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width:980px){
+      .sections{grid-template-columns:1fr}
+    }
+
+    .panel{
+      border:1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.72);
+      box-shadow: 0 10px 28px rgba(0,0,0,.08);
+      padding:18px 18px 16px;
+    }
+    .panel h2{
+      margin:0;
+      font-size:18px;
+      font-weight:1100;
+      letter-spacing:.02em;
+    }
+    .panel p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:14.8px;
+    }
+
+    ul{
+      margin:10px 0 0;
+      padding:0 0 0 18px;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:14.6px;
+    }
+    li{margin:6px 0}
+    .em{color:var(--ink); font-weight:1000}
+
+    /* 流程条：杂志目录风 */
+    .flow{
+      margin-top:14px;
+      border-top:1px solid var(--hair);
+      padding-top:14px;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+    }
+    @media (max-width:980px){ .flow{grid-template-columns:1fr} }
+
+    .step{
+      border:1px solid rgba(0,0,0,.10);
+      border-radius:18px;
+      background: rgba(255,255,255,.75);
+      padding:12px 12px 10px;
+      position:relative;
+    }
+    .stepTop{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-bottom:6px;
+    }
+    .num{
+      width:34px;height:34px;border-radius:14px;
+      display:grid;place-items:center;
+      background:#111;
+      color:#fff;
+      font-weight:1000;
+      opacity:.92;
+      flex:0 0 auto;
+    }
+    .step b{font-weight:1100}
+    .step span{
+      display:block;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:13.8px;
+      margin-top:4px;
+    }
+
+    /* 底部按钮 */
+    .cta{
+      margin-top:16px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+      padding:12px 0 4px;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      padding:12px 18px;
+      border-radius:14px;
+      font-weight:1000;
+      font-size:15px;
+      background: var(--accent);
+      color:#fff;
+      box-shadow: 0 12px 24px rgba(139,74,24,.22);
+      transition: transform .10s ease, filter .10s ease, box-shadow .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); filter:brightness(1.02); box-shadow:0 16px 30px rgba(139,74,24,.26)}
+    .btnGhost{
+      background: transparent;
+      color: var(--ink);
+      border:1px solid rgba(0,0,0,.18);
+      box-shadow:none;
+    }
+
+    /* 弹窗：复制招生文案 */
+    .mask{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:99;
+    }
+    .modal{
+      width:min(760px, 96vw);
+      background: #fff;
+      border-radius: 18px;
+      border:1px solid rgba(0,0,0,.14);
+      box-shadow: var(--shadow);
+      padding:14px 14px 12px;
+    }
+    .modalHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .modalHead b{
+      font-size:15.5px;
+      font-weight:1100;
+    }
+    .x{
+      width:38px;height:34px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.18);
+      background: transparent;
+      font-weight:1000;
+      cursor:pointer;
+    }
+    .text{
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:16px;
+      background: #fbfaf8;
+      padding:12px 12px;
+      white-space:pre-wrap;
+      line-height:1.75;
+      color:#1b1b1b;
+      font-size:14px;
+    }
+    .modalFoot{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Project-Based Learning</span>
+      </div>
+      <div class="issue">
+        AI × PBL · History Board Game Studio<br/>
+        <span style="opacity:.9">Issue / Course Intro</span>
+      </div>
+    </header>
+
+    <main class="cover">
+      <div class="coverInner">
+        <div class="kickerRow">
+          <div class="kicker">
+            <span class="pill">历史 + 思辨 + 创作</span>
+            <span class="pill">AI 辅助原型</span>
+            <span class="pill">输出可试玩作品</span>
+          </div>
+          <div class="stamp">MAKE · PLAY · ITERATE</div>
+        </div>
+
+        <h1>历史桌游创作营</h1>
+
+        <div class="sub">
+          我们不把历史当作“背诵题”，而是把它当作一套<strong>可运行的系统</strong>。<br/>
+          在这里，你要做的不是听课，而是完成一个项目：把历史中的<strong>冲突与选择</strong>做成一款<strong>真的能玩</strong>的桌游。<br/>
+          你会学会用规则表达观点：<b>资源有限</b>、<b>选择有代价</b>、<b>后果会反馈</b>。
+        </div>
+
+        <div class="rule">
+          <div class="quote">
+            “先做出最小可玩版本，再把它做得更好玩。”
+            <small>—— 这是创作营的唯一方法论</small>
+          </div>
+
+          <div class="meta">
+            <h3>Quick Facts</h3>
+            <div class="metaGrid">
+              <div>
+                <b>最终产出</b>
+                <span>可试玩桌游 + 规则书 + 组件</span>
+              </div>
+              <div>
+                <b>学习方式</b>
+                <span>团队协作 + 任务推进</span>
+              </div>
+              <div>
+                <b>核心能力</b>
+                <span>思辨 → 机制表达 → 迭代</span>
+              </div>
+              <div>
+                <b>AI 的角色</b>
+                <span>加速素材与原型，不替代思考</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="flow" aria-label="项目流程">
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">1</div>
+              <div>
+                <b>选题与驱动问题</b>
+                <span>选一个“难选题”：两种都合理但不能同时选。</span>
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">2</div>
+              <div>
+                <b>机制与规则原型</b>
+                <span>把历史变成规则：资源、行动、代价、后果。</span>
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">3</div>
+              <div>
+                <b>素材制作与包装</b>
+                <span>事件卡/角色卡/地图文案，让玩家“看得懂”。</span>
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="stepTop">
+              <div class="num">4</div>
+              <div>
+                <b>试玩复盘与迭代</b>
+                <span>发现哪里卡、哪里无聊、哪里太强，然后升级版本。</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sections">
+          <div class="panel">
+            <h2>你会收获什么</h2>
+            <ul>
+              <li><span class="em">一套作品</span>：规则书 + 卡牌/地图/角色组件（可试玩）</li>
+              <li><span class="em">一套能力</span>：把观点写进机制（限制 / 代价 / 后果）</li>
+              <li><span class="em">一套方法</span>：用试玩复盘推动迭代（越做越好玩）</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h2>适合谁参加</h2>
+            <p>如果你喜欢游戏、策略、故事或创作，想做出一个“能拿出来玩”的作品，这里就适合你。</p>
+            <ul>
+              <li>不需要很强的历史基础（我们会提供素材与引导）</li>
+              <li>不需要会写代码（重点是设计，AI 可辅助原型）</li>
+              <li>不需要一开始就完美（先做出来，再升级）</li>
+            </ul>
+          </div>
+        </section>
+
+        <div class="cta">
+          <button class="btn" onclick="openModal()">复制课程介绍文案</button>
+          <button class="btn btnGhost" onclick="jumpToBottom()">我准备好了，开启项目挑战</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="mask" id="mask" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modalHead">
+        <b>课程介绍文案（可直接发群/朋友圈）</b>
+        <button class="x" onclick="closeModal()">✕</button>
+      </div>
+      <div class="text" id="copyText"></div>
+      <div class="modalFoot">
+        <button class="btn btnGhost" onclick="copy()">复制</button>
+        <button class="btn" onclick="closeModal()">完成</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const COPY = `历史桌游创作营（AI×PBL）
+我们不把历史当作“背诵题”，而是把它当作一套可运行的系统。
+在这里，你要做的不是听课，而是完成一个项目：把历史中的“冲突与选择”做成一款真的能玩的桌游。
+
+你将经历：选题 → 机制与规则原型 → 素材制作 → 试玩复盘 → 版本迭代
+最终交付：可试玩桌游（规则书 + 卡牌/地图/角色组件）+ 迭代说明。
+
+核心方法：先做出最小可玩版本，再把它做得更好玩。`;
+
+    function openModal(){
+      document.getElementById("copyText").textContent = COPY;
+      document.getElementById("mask").style.display="flex";
+    }
+    function closeModal(){
+      document.getElementById("mask").style.display="none";
+    }
+    async function copy(){
+      try{
+        await navigator.clipboard.writeText(COPY);
+        alert("已复制！");
+      }catch(e){
+        alert("复制失败：浏览器未授权剪贴板。你可以手动选中文案复制。");
+      }
+    }
+    function jumpToBottom(){
+      alert("开启项目挑战：\n1）选一个你最想做成游戏的历史冲突\n2）写一句驱动问题\n3）开始搭建最小可玩版本");
+      window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"});
+    }
+    document.getElementById("mask").addEventListener("click",(e)=>{
+      if(e.target.id==="mask") closeModal();
+    });
+  </script>
+</body>
+</html>
